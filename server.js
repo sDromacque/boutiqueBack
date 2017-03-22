@@ -8,6 +8,8 @@ const index = require('./routes/index');
 const users = require('./routes/users');
 
 const app = express();
+const mongoose = require('mongoose');
+const database = 'mongodb://localhost/boutique';
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -22,6 +24,29 @@ app.use((req, res, next) => {
   let err = new Error('Not Found');
   err.status = 404;
   next(err);
+});
+
+
+// Create the database connection
+mongoose.connect(database);
+
+mongoose.connection.on('connected',  () => {
+    console.log('Mongoose default connection open to ' + database);
+});
+
+mongoose.connection.on('error', err => {
+    console.log('Mongoose default connection error: ' + err);
+});
+
+mongoose.connection.on('disconnected', () => {
+    console.log('Mongoose default connection disconnected');
+});
+
+process.on('SIGINT', () => {
+    mongoose.connection.close( () => {
+        console.log('Mongoose default connection disconnected through app termination');
+        process.exit(0);
+    });
 });
 
 // error handler
