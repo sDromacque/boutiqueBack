@@ -3,6 +3,7 @@ const express = require('express');
 const app = express('../../bin/www');
 const chai = require('chai');
 const assert = chai.assert;
+const User = require('../../models/user');
 
 describe('GET /users', () => {
     it('respond with json', () => {
@@ -12,7 +13,7 @@ describe('GET /users', () => {
     });
 
     it('GET /:id', () => {
-        let user = new User({
+        let toto = new User({
             name: 'Bob',
             lastname: 'éponge'
         });
