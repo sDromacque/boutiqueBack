@@ -1,0 +1,9 @@
+{
+  "name": "example",
+  "version": "0.1.0",
+  "description": "A basic apiDoc example",
+  "ulr": "http://localhost:3000/apidoc",
+  "template": {
+    "forceLanguage": "fr"
+  }
+}
