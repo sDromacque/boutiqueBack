@@ -3,12 +3,12 @@ const express = require('express');
 const app = express('../../bin/www');
 const chai = require('chai');
 const assert = chai.assert;
-const User = require('../../app/routes/users');
+const User = require('../../app/routes/user');
 
-describe('GET /users', () => {
+describe('GET /user', () => {
     it('respond with json', () => {
         request(app)
-            .get('/users')
+            .get('/user')
             .expect(200);
     });
 
@@ -18,7 +18,7 @@ describe('GET /users', () => {
             lastname: 'éponge'
         });
        request(app)
-           .get('/users/:id')
+           .get('/user/:id')
            .expect(200);
     });
 });

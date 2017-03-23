@@ -5,7 +5,7 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 
 const index = require('./app/routes/index');
-const users = require('./app/routes/users');
+const user = require('./app/routes/user');
 
 const app = express();
 const mongoose = require('mongoose');
@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/user', user);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
