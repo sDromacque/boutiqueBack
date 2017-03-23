@@ -4,8 +4,8 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 
-const index = require('./routes/index');
-const users = require('./routes/users');
+const index = require('./app/routes/index');
+const users = require('./app/routes/users');
 
 const app = express();
 const mongoose = require('mongoose');

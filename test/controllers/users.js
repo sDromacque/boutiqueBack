@@ -3,7 +3,7 @@ const express = require('express');
 const app = express('../../bin/www');
 const chai = require('chai');
 const assert = chai.assert;
-const User = require('../../models/user');
+const User = require('../../app/routes/users');
 
 describe('GET /users', () => {
     it('respond with json', () => {
