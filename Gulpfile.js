@@ -2,14 +2,11 @@ const gulp = require("gulp");
 const jshint = require("gulp-jshint");
 const stylish = require('jshint-stylish');
 const paths = {
-    'root': ["./**/*.js", "!node_modules/**/*.js"]
+    'root': ["./**/*/*.js", "!node_modules/**/*.js", "!apidoc/**/*.js", "!coverage/**/*.js"]
 };
 
-gulp.task('default', ['jshint']);
-
-gulp.task("lint", () => {
+gulp.task('default', () =>
     gulp.src(paths.root)
-        .pipe(jshint())
-        .pipe(jshint.reporter(stylish));
-});
-
+        .pipe(jshint('.jshintrc'))
+        .pipe(jshint.reporter('jshint-stylish'))
+);

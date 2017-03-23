@@ -26,7 +26,6 @@ app.use((req, res, next) => {
   next(err);
 });
 
-
 // Create the database connection
 mongoose.connect(database);
 
