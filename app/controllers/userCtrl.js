@@ -1,3 +1,7 @@
+const User = require('../models/user');
+const mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
+
 /**
  * @api {get} /user/:id Request User information
  * @apiName GetUser
@@ -24,7 +28,9 @@
  *     }
  */
 module.exports.findById = (req, res) => {
-  res.json('find by id');
+  User.findById('58d4fde82a605f30dcf25701', (err, user) => {
+    res.json(user);
+  });
 };
 
 module.exports.findAll = (req, res) => {
