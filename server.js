@@ -29,22 +29,22 @@ app.use((req, res, next) => {
 mongoose.connect(database);
 
 mongoose.connection.on('connected',  () => {
-    console.log('Mongoose default connection open to ' + database);
+  console.log('Mongoose default connection open to ' + database);
 });
 
 mongoose.connection.on('error', err => {
-    console.log('Mongoose default connection error: ' + err);
+  console.log('Mongoose default connection error: ' + err);
 });
 
 mongoose.connection.on('disconnected', () => {
-    console.log('Mongoose default connection disconnected');
+  console.log('Mongoose default connection disconnected');
 });
 
 process.on('SIGINT', () => {
-    mongoose.connection.close( () => {
-        console.log('Mongoose default connection disconnected through app termination');
-        process.exit(0);
-    });
+  mongoose.connection.close( () => {
+	console.log('Mongoose default connection disconnected through app termination');
+	process.exit(0);
+  });
 });
 
 // error handler
