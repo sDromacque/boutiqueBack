@@ -3,7 +3,6 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-
 const index = require('./app/routes/index');
 const user = require('./app/routes/user');
 
