@@ -5,15 +5,19 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const index = require('./app/routes/index');
 const user = require('./app/routes/user');
-
+const colors = require('colors');
 const app = express();
 const mongoose = require('mongoose');
-const database = 'mongodb://localhost/boutique';
+const config = require('config');
+
+const options = {
+  server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
+  replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } }
+};
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/user', user);
@@ -25,26 +29,21 @@ app.use((req, res, next) => {
   next(err);
 });
 
-// Create the database connection
-mongoose.connect(database);
+console.log(colors.rainbow("Running in :"  + process.env.NODE_ENV));
+
+mongoose.connect(config.DBHost, options);
+let database = mongoose.connection;
 
 mongoose.connection.on('connected',  () => {
-  console.log('Mongoose default connection open to ' + database);
+  console.log(colors.green('Mongoose default connection open to ' + database.host));
 });
 
 mongoose.connection.on('error', err => {
-  console.log('Mongoose default connection error: ' + err);
+  console.log(colors.red('Mongoose default connection error: ' + err));
 });
 
 mongoose.connection.on('disconnected', () => {
-  console.log('Mongoose default connection disconnected');
-});
-
-process.on('SIGINT', () => {
-  mongoose.connection.close( () => {
-	console.log('Mongoose default connection disconnected through app termination');
-	process.exit(0);
-  });
+  console.log(colors.red('Mongoose default connection disconnected'));
 });
 
 // error handler
