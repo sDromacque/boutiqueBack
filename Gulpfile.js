@@ -1,4 +1,5 @@
 const gulp = require("gulp");
+const apidoc = require('gulp-apidoc');
 const jshint = require("gulp-jshint");
 const stylish = require('jshint-stylish');
 const paths = {
@@ -10,3 +11,10 @@ gulp.task('default', () =>
 	.pipe(jshint('.jshintrc'))
 	.pipe(jshint.reporter('jshint-stylish'))
 );
+
+gulp.task('doc', function(done){
+  apidoc({
+    src: "app/controllers",
+    dest: "public/apidoc"
+  },done);
+});
