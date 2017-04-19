@@ -3,7 +3,7 @@ const apidoc = require('gulp-apidoc');
 const jshint = require("gulp-jshint");
 const stylish = require('jshint-stylish');
 const paths = {
-  'root': ["./**/*/*.js", "!node_modules/**/*.js", "!apidoc/**/*.js", "!coverage/**/*.js"]
+  'root': ["./**/*/*.js", "!node_modules/**/*.js", "!public/apidoc/**/*.js", "!coverage/**/*.js"]
 };
 
 gulp.task('default', () =>
