@@ -35,7 +35,7 @@ module.exports = {
     })
     .then(user => {
       if (!user){
-        throw boom.notFound();
+        res.json(boom.notFound('User not found'));
       }
       res.json(user);
     })
