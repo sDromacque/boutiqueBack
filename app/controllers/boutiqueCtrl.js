@@ -29,7 +29,7 @@ module.exports = {
   *   "error": "BoutiqueNotFound"
   * }
    */
-  findById: (req, res, next) => {
+  findById: (req, res) => {
     Boutique.findOne({
       _id: req.params.id
     })
@@ -44,13 +44,13 @@ module.exports = {
     });
   },
 
-  findAll: (req, res) => {
+  findAll: (req, res, next) => {
     Boutique.find()
-    .then(boutiquess => {
-      if (!boutiquess){
+    .then(boutiques => {
+      if (!boutiques){
         return next(boom.notFound());
       }
-      res.json(boutiquess)
+      res.json(boutiques);
     });
   }
 };

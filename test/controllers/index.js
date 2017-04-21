@@ -6,8 +6,8 @@ const app = express('../../bin/www');
 
 describe('GET /', () => {
   it('respond with json', () => {
-	request(app)
-	  .get('/')
-	  .expect(200);
+    request(app)
+    .get('/')
+    .expect(200);
   });
 });

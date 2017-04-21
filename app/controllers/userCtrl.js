@@ -29,7 +29,7 @@ module.exports = {
   *   "error": "UserNotFound"
   * }
   */
-  findById: (req, res, next) => {
+  findById: (req, res) => {
     User.findOne({
       _id: req.params.id
     })
@@ -50,7 +50,7 @@ module.exports = {
       if (!users){
         return next(boom.notFound());
       }
-      res.json(users)
+      res.json(users);
     });
   }
 };

@@ -1,13 +1,10 @@
 process.env.NODE_ENV = 'test';
 
 const request = require('supertest');
-const express = require('express');
 const server = require('../../server');
 
 const chai = require('chai');
-const should = chai.should();
 const chaiHttp = require('chai-http');
-const sinon = require('sinon');
 const User = require('../../app/models/user');
 
 chai.use(chaiHttp);

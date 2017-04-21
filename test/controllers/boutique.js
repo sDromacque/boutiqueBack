@@ -1,13 +1,10 @@
 process.env.NODE_ENV = 'test';
 
 const request = require('supertest');
-const express = require('express');
 const server = require('../../server');
 
 const chai = require('chai');
-const should = chai.should();
 const chaiHttp = require('chai-http');
-const sinon = require('sinon');
 const Boutique = require('../../app/models/boutique');
 const faker = require('faker');
 
@@ -28,7 +25,7 @@ describe('Boutique', () => {
         name: faker.company.companyName(),
         email: faker.internet.email(),
         loc: {
-          "coordinates": [125.6, 10.1]
+          'coordinates': [125.6, 10.1]
         }
       });
 
@@ -40,8 +37,8 @@ describe('Boutique', () => {
           res.body.should.have.property('name');
           res.body.should.have.property('email');
           res.body.should.have.property('loc');
-          res.body.should.have.property('created_at');
-          res.body.should.have.property('updated_at');
+          res.body.should.have.property('createdAt');
+          res.body.should.have.property('updatedAt');
           res.should.have.status(200);
           done();
         });
@@ -55,8 +52,8 @@ describe('Boutique', () => {
         loc: {
 
         },
-        created_at: Date.now(),
-        updated_at: Date.now()
+        createdAt: Date.now(),
+        updatedAt: Date.now()
       });
 
       request(server)
