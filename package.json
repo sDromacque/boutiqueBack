@@ -23,6 +23,7 @@
     "apidoc": "^0.17.5",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
+    "faker": "^4.1.0",
     "gulp": "^3.9.1",
     "gulp-jshint": "^2.0.4",
     "istanbul": "^0.4.5",

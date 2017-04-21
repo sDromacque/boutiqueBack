@@ -9,6 +9,7 @@ const should = chai.should();
 const chaiHttp = require('chai-http');
 const sinon = require('sinon');
 const Boutique = require('../../app/models/boutique');
+const faker = require('faker');
 
 chai.use(chaiHttp);
 
