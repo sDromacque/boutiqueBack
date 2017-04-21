@@ -1,3 +1,8 @@
-/**
- * Created by seb on 20/04/17.
- */
+const express = require('express');
+const router = express.Router();
+const boutiqueCtrl = require('../controllers/boutiqueCtrl');
+
+router.get('/', boutiqueCtrl.findAll);
+router.get('/:id', boutiqueCtrl.findById);
+
+module.exports = router;

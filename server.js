@@ -5,15 +5,11 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const index = require('./app/routes/index');
 const user = require('./app/routes/user');
+const boutique = require('./app/routes/boutique');
 const colors = require('colors');
 const app = express();
 const mongoose = require('mongoose');
 const config = require('config');
-
-const options = {
-  server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
-  replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } }
-};
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -22,10 +18,11 @@ app.use(express.static('public'));
 
 app.use('/', index);
 app.use('/user', user);
+app.use('/boutique', boutique);
 
 console.log(colors.rainbow("Running in :"  + process.env.NODE_ENV));
 
-mongoose.connect(config.DBHost, options);
+mongoose.connect(config.DBHost);
 let database = mongoose.connection;
 
 mongoose.connection.on('connected',  () => {
