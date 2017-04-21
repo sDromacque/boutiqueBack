@@ -25,10 +25,10 @@ describe('Boutique', () => {
   describe('GET /boutiques/:id', () => {
     it('should return a single boutique', (done) => {
       let boutique = new Boutique({
-        name: 'Bob',
-        email: 'éponge',
+        name: faker.company.companyName(),
+        email: faker.internet.email(),
         loc: {
-
+          "coordinates": [125.6, 10.1]
         }
       });
 
@@ -38,7 +38,10 @@ describe('Boutique', () => {
         .end((err, res) => {
           res.body.should.have.property('_id');
           res.body.should.have.property('name');
-          res.body.should.have.property('lastname');
+          res.body.should.have.property('email');
+          res.body.should.have.property('loc');
+          res.body.should.have.property('created_at');
+          res.body.should.have.property('updated_at');
           res.should.have.status(200);
           done();
         });
@@ -48,7 +51,12 @@ describe('Boutique', () => {
     it('should return 404', () => {
       let boutique = new Boutique({
         name: 'Tom',
-        lastname: 'Tom'
+        email: 'Tom',
+        loc: {
+
+        },
+        created_at: Date.now(),
+        updated_at: Date.now()
       });
 
       request(server)
