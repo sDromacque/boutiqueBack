@@ -5,12 +5,14 @@ const stylish = require('jshint-stylish');
 const paths = {
   'root': ["./**/*/*.js", "!node_modules/**/*.js", "!public/apidoc/**/*.js", "!coverage/**/*.js"]
 };
+const eslint = require('gulp-eslint');
 
-gulp.task('default', () =>
-  gulp.src(paths.root)
-	.pipe(jshint('.jshintrc'))
-	.pipe(jshint.reporter('jshint-stylish'))
-);
+gulp.task('lint', function() {
+  return gulp.src(paths.root)
+  .pipe(eslint())
+  .pipe(eslint.format())
+  .pipe(eslint.failAfterError());
+});
 
 gulp.task('doc', function(done){
   apidoc({
