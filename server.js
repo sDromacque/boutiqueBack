@@ -3,7 +3,6 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-const index = require('./app/routes/index');
 const user = require('./app/routes/user');
 const boutique = require('./app/routes/boutique');
 const colors = require('colors');
@@ -19,6 +18,7 @@ app.use(express.static('public'));
 app.use('/user', user);
 app.use('/boutique', boutique);
 app.use('/', express.static(__dirname + '/public/apidoc'));
+app.use('/coverage', express.static(__dirname + '/coverage/lcov-report'));
 
 console.log(colors.rainbow("Running in :"  + process.env.NODE_ENV));
 
