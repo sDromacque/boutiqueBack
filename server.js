@@ -37,15 +37,13 @@ mongoose.connection.on('disconnected', () => {
   console.log(colors.red('Mongoose default connection disconnected'));
 });
 
-//development error handler
-if (app.get('env') === 'dev') {
-  app.use((err, req, res) => {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
-}
+app.use((err, req, res, next) => {
+  if (! err) {
+    return next();
+  }
+
+  res.status(500);
+  res.send('500: Internal server error');
+});
 
 module.exports = app;
