@@ -16,9 +16,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
 
-app.use('/', index);
 app.use('/user', user);
 app.use('/boutique', boutique);
+app.use('/', express.static(__dirname + '/public/apidoc'));
 
 console.log(colors.rainbow("Running in :"  + process.env.NODE_ENV));
 
