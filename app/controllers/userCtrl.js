@@ -125,9 +125,42 @@ module.exports = {
           return next(err);
       }
     });
+  },
+
+  /**
+  * @api {put} /user/:id Request User information
+  * @apiName PutUser
+  * @apiGroup User
+  *
+  * @apiParam {Number} id Users unique ID.
+  *
+  * @apiSuccessExample Success-Response:
+  * HTTP/1.1 200 OK
+  * {
+  *   "firstname": "John",
+  *   "lastname": "Doe"
+  * }
+  *
+  * @apiError UserNotFound The id of the User was not found.
+  *
+  * @apiErrorExample Error-Response:
+  * HTTP/1.1 404 Not Found
+  * {
+  *   "error": "UserNotFound"
+  * }
+  */
+  update: (req, res, next) => {
+    User.findOneAndUpdate({
+      _id: req.params.id},
+      req.body
+    )
+    .then(result =>  {
+      if (!result) {
+        throw boom.notFound();
+      }
+
+      res.json(result);
+    })
+    .catch(next);
   }
-
-
-
-
 };
