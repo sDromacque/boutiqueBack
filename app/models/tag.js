@@ -3,12 +3,12 @@ let mongoose = require( 'mongoose' ),
   ;
 
 let TagSchema = new Schema({
-  name: String,
-  username: String,
-  lastname: String,
-  email: String
+  name: {
+    type: String
+  },
+
 });
 
-let User = mongoose.model('User', UserSchema);
+let Tag = mongoose.model('Tag', TagSchema);
 
-module.exports = User;
+module.exports = Tag;

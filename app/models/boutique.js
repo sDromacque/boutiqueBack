@@ -16,6 +16,24 @@ let BoutiqueSchema = new mongoose.Schema({
     },
     coordinates: []
   },
+  address:{
+    zipCode: {
+      type: String
+    },
+    city: {
+
+    },
+    country: {
+      type: String
+    },
+    streetAddress: {
+
+    }
+  },
+  tags: [],
+  ranking: {
+    type: Number
+  },
   createdAt: {
     type: Date,
     default: Date.now
