@@ -9,15 +9,40 @@ let UserSchema = new Schema({
     type: String,
     required: true
   },
-  username: String,
-  lastname: String,
+  username: {
+    type: String,
+    required: true
+  },
+  lastname: {
+    type: String,
+    required: true
+  },
   email: {
     type: String,
     required: true,
     validate: email => {
       return validator.isEmail(email);
+    },
+    unique: true
+  },
+  address:{
+    zipCode: {
+      type: Number,
+      required: true
+    },
+    city: {
+      type: String,
+      required: true
+    },
+    country: {
+      type: String,
+      required: true
+    },
+    streetAddress: {
+      type: String,
+      required: true
     }
-  }
+  },
 });
 
 let User = mongoose.model('User', UserSchema);

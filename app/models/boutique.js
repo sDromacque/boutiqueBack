@@ -18,16 +18,22 @@ let BoutiqueSchema = new mongoose.Schema({
   },
   address:{
     zipCode: {
-      type: String
+      type: Number,
+      required: true,
+      min: 5,
+      max: 5
     },
     city: {
-
+      type: String,
+      required: true
     },
     country: {
-      type: String
+      type: String,
+      required: true
     },
     streetAddress: {
-
+      type: String,
+      required: true
     }
   },
   tags: [],
