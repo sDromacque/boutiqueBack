@@ -5,7 +5,7 @@ let mongoose = require( 'mongoose' ),
 const validator = require('validator');
 
 let UserSchema = new Schema({
-  name: {
+  firstName: {
     type: String,
     required: true
   },
@@ -13,7 +13,7 @@ let UserSchema = new Schema({
     type: String,
     required: true
   },
-  lastname: {
+  lastName: {
     type: String,
     required: true
   },
