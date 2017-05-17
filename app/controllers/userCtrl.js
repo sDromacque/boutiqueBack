@@ -153,11 +153,22 @@ module.exports = {
     )
     .then(result =>  {
       if (!result) {
-        throw boom.notFound();
+        res.json(boom.notFound('User not found'));
       }
 
       res.json(result);
     })
     .catch(next);
+  },
+
+  delete: (req, res, next) => {
+    User.findOneAndRemove({_id: req.params.id})
+      .then(result => {
+        if (!result) {
+          res.json(boom.notFound('User not found'));
+        }
+        res.status(204).json(result);
+      })
+      .catch(next);
   }
 };
