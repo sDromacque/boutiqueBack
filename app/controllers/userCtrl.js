@@ -69,9 +69,6 @@ module.exports = {
   findAll: (req, res) => {
     User.find()
     .then(users => {
-      if (!users){
-        return next(boom.notFound());
-      }
       res.json(users);
     });
   },
