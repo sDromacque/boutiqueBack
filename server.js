@@ -10,11 +10,14 @@ const app = express();
 const mongoose = require('mongoose');
 const config = require('config');
 const cors = require('cors');
+const morgan = require('morgan');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
+app.use(morgan("common"));
+
 app.use(cors());
 
 app.use('/user', user);
