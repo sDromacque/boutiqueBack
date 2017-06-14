@@ -7,31 +7,51 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const Boutique = require('../../app/models/boutique');
 const faker = require('faker');
+const _ = require('lodash');
+const Promise = require('bluebird');
 
 chai.use(chaiHttp);
 
 describe('Boutique', () => {
+
+  let fixture = {};
+
+  beforeEach(() => {
+    fixture.boutiques = [
+      new Boutique({
+        name: faker.name.findName(),
+        email: faker.internet.email(),
+        address: {
+          zipCode: faker.random.number({
+            min_length: 5,
+            max_length: 5
+          }),
+          city: faker.address.city(),
+          country: faker.address.country(),
+          streetAddress: faker.address.streetAddress()
+        },
+        ranking: faker.random.number
+      })
+    ];
+
+
+    return Promise.all([
+      Boutique.insertMany(fixture.boutiques)
+    ])
+  });
+
   describe('GET /boutique', () => {
     it('should return all boutique', () => {
       request(server)
-      .get('/boutique')
-      .expect(200);
+        .get('/boutique')
+        .expect(200);
     });
   });
 
   describe('GET /boutiques/:id', () => {
-    it('should return a single boutique', (done) => {
-      let boutique = new Boutique({
-        name: faker.company.companyName(),
-        email: faker.internet.email(),
-        loc: {
-          'coordinates': [125.6, 10.1]
-        }
-      });
-
-      boutique.save((err, data) => {
-        request(server)
-        .get('/boutique/'+data._id)
+    it('should return a single boutique', () => {
+      request(server)
+        .get('/boutique/' + fixture.boutiques[0]._id)
         .end((err, res) => {
           res.body.should.have.property('_id');
           res.body.should.have.property('name');
@@ -40,35 +60,20 @@ describe('Boutique', () => {
           res.body.should.have.property('createdAt');
           res.body.should.have.property('updatedAt');
           res.should.have.status(200);
-          done();
         });
-      });
     });
 
     it('should return 404', () => {
-      let boutique = new Boutique({
-        name: 'Tom',
-        email: 'Tom',
-        loc: {
-
-        },
-        createdAt: Date.now(),
-        updatedAt: Date.now()
-      });
+      let url = '/' + _.join([
+          'boutique',
+          new Boutique()._id
+        ], '/');
 
       request(server)
-      .get('/boutique/'+boutique._id)
-      .end((err, res) => {
-        res.should.have.status(404);
-      });
-    });
-
-    it('should return 400', () => {
-      request(server)
-      .get('/boutique/58f5e474a748cb48e4b9c3f')
-      .end((err, res) => {
-        res.should.have.status(400);
-      });
+        .get(url)
+        .end((err, res) => {
+          res.should.have.status(404);
+        });
     });
   });
 });

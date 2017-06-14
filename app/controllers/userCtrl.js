@@ -104,22 +104,18 @@ module.exports = {
     })
     .catch(err => {
       switch (err.name || err.kind) {
-        case 'ValidationError':
+        case 'MongoError':
           //Unique Conflict
-          if (_.some(err.errors, {kind: 'Duplicate value'})) {
+          if (err.code === 11000) {
             return res.status(409).json({
-              errors: _(err.errors)
-              .filter({kind: 'Duplicate value'})
-              .map('path')
-              .value()
+              errors: _(err.message)
+                .value()
             });
           }
-
+        default:
           return res.status(400).json({
             errors: _.map(err.errors, 'path')
           });
-        default:
-          return next(err);
       }
     });
   },
@@ -156,7 +152,7 @@ module.exports = {
         res.json(boom.notFound('User not found'));
       }
 
-      res.json(result);
+      res.status(204).json(result);
     })
     .catch(next);
   },
@@ -167,7 +163,7 @@ module.exports = {
         if (!result) {
           res.json(boom.notFound('User not found'));
         }
-        res.status(204).json(result);
+        res.status(200).json(result);
       })
       .catch(next);
   }

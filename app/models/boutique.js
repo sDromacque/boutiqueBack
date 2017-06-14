@@ -7,7 +7,8 @@ let BoutiqueSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   loc: {
     type: {
@@ -20,8 +21,8 @@ let BoutiqueSchema = new mongoose.Schema({
     zipCode: {
       type: Number,
       required: true,
-      min: 5,
-      max: 5
+      minlength: 5,
+      maxlength: 5
     },
     city: {
       type: String,
