@@ -44,7 +44,9 @@ describe('Boutique', () => {
     it('should return all boutique', () => {
       request(server)
         .get('/boutique')
-        .expect(200);
+        .end((err, res) => {
+          res.should.have.status(200);
+        });
     });
   });
 

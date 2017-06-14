@@ -44,12 +44,9 @@ module.exports = {
     });
   },
 
-  findAll: (req, res, next) => {
+  findAll: (req, res) => {
     Boutique.find()
     .then(boutiques => {
-      if (!boutiques){
-        return next(boom.notFound());
-      }
       res.json(boutiques);
     });
   }
