@@ -3,14 +3,16 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-const user = require('./app/routes/user');
-const boutique = require('./app/routes/boutique');
 const colors = require('colors');
 const app = express();
 const mongoose = require('mongoose');
 const config = require('config');
 const cors = require('cors');
 const morgan = require('morgan');
+
+const user     = require('./app/routes/user');
+const boutique = require('./app/routes/boutique');
+const auth     = require('./app/routes/auth')
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -22,6 +24,8 @@ app.use(cors());
 
 app.use('/user', user);
 app.use('/boutique', boutique);
+app.use('/auth', auth);
+
 app.use('/', express.static(__dirname + '/public/apidoc'));
 app.use('/coverage', express.static(__dirname + '/coverage/lcov-report'));
 

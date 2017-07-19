@@ -96,6 +96,7 @@ module.exports = {
   *
   */
   post: (req, res) => {
+    console.log('ok')
     let user = new User(req.body);
 
     User.create(user)
