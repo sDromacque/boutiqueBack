@@ -1,3 +1,6 @@
 {
-  "DBHost": "mongodb://localhost/boutique"
+  "DBHost": "mongodb://localhost/boutique",
+  "mailgun_priv_key": "",
+  "mailgun_domain": "",
+  "mailchimpApiKey": ""
 }

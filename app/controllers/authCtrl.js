@@ -5,9 +5,14 @@ const setUserInfo = require('../../helpers/authenticate_helper').setUserInfo;
 const generateToken = require('../../helpers/authenticate_helper').generateToken;
 const Promise = require('bluebird');
 const _ = require('lodash');
+const config = require('../../config/dev');
+
+const mailgun = require('mailgun-js')({
+    apiKey: config.mailgun_priv_key,
+    domain: config.mailgun_domain
+  });
 
 module.exports = {
-
   /**
   * @api {post} /register Post a new user
   * @apiName PostUser
@@ -44,9 +49,20 @@ module.exports = {
         ])
       })
       .spread((userInfo, token) => {
+        let data = {
+          from: 'Excited User <me@samples.mailgun.org>',
+          to: userInfo.email,
+          subject: 'Welcome to website',
+          text: 'Testing some Mailgun awesomness!'
+        };
+
+        mailgun.messages().send(data, (error, body) => {
+          console.log(body);
+        });
+
         res.status(201).json({
           token: 'JWT ' + token,
-          user: _.omit(user, ['password'])
+          user: userInfo
         })
       })
     })

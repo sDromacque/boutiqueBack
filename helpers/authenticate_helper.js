@@ -1,6 +1,6 @@
 const Promise = require('bluebird');
 const jwt = require('jsonwebtoken');
-const config = require('../config/main');
+const config = require('../config/auth');
 
 module.exports = {
   setUserInfo: request => {
