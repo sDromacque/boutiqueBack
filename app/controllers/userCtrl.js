@@ -1,7 +1,6 @@
 const User = require('../models/user');
 const mongoose = require('mongoose');
 const boom = require('boom');
-const _ = require('lodash');
 mongoose.Promise = require('bluebird');
 
 module.exports = {
@@ -34,15 +33,15 @@ module.exports = {
     User.findOne({
       _id: req.params.id
     })
-    .then(user => {
-      if (!user){
-        res.json(boom.notFound('User not found'));
-      }
-      res.json(user);
-    })
-    .catch(() => {
-      res.json(boom.badRequest());
-    });
+      .then(user => {
+        if (!user){
+          res.json(boom.notFound('User not found'));
+        }
+        res.json(user);
+      })
+      .catch(() => {
+        res.json(boom.badRequest());
+      });
   },
 
   /**
@@ -68,9 +67,9 @@ module.exports = {
   */
   findAll: (req, res) => {
     User.find()
-    .then(users => {
-      res.json(users);
-    });
+      .then(users => {
+        res.json(users);
+      });
   },
 
   /**
@@ -97,7 +96,8 @@ module.exports = {
   */
   update: (req, res, next) => {
     User.findOneAndUpdate({
-      _id: req.params.id},
+        _id: req.params.id
+      },
       req.body
     )
     .then(result =>  {

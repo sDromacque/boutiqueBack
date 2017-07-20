@@ -9,7 +9,7 @@ module.exports = {
         _id: request._id,
         email: request.email,
         role: request.role
-      })
+      });
     });
   },
 
@@ -17,7 +17,7 @@ module.exports = {
     return new Promise(resolve => {
       resolve(jwt.sign(user, config.secret, {
         expiresIn: 604800 // in seconds
-      }))
+      }));
     });
   }
 };

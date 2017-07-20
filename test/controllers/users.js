@@ -1,6 +1,6 @@
 process.env.NODE_ENV = 'test';
 
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const request = require('supertest');
 const server = require('../../server');
 const chai = require('chai');
@@ -39,7 +39,7 @@ describe('User', () => {
 
     return Promise.all([
       User.insertMany(fixture.users)
-    ])
+    ]);
   });
 
   describe('GET /user', () => {

@@ -37,7 +37,7 @@ describe('Boutique', () => {
 
     return Promise.all([
       Boutique.insertMany(fixture.boutiques)
-    ])
+    ]);
   });
 
   describe('GET /boutique', () => {
