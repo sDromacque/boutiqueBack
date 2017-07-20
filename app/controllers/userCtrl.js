@@ -74,54 +74,6 @@ module.exports = {
   },
 
   /**
-  * @api {post} /user Request User information
-  * @apiName PostUser
-  * @apiGroup User
-  *
-  * @apiSuccess {String} firstname Firstname of the User.
-  * @apiSuccess {String} lastname  Lastname of the User.
-  *
-  * @apiExample Body
-  * {
-  *   "name": "tom",
-  *   "email": "tom@gmail.com"
-  * }
-  *
-  * @apiSuccessExample Success-Response:
-  * HTTP/1.1 200 OK
-  * {
-  *   "firstname": "John",
-  *   "lastname": "Doe"
-  * }
-  *
-  */
-  post: (req, res) => {
-    console.log('ok')
-    let user = new User(req.body);
-
-    User.create(user)
-    .then(user => {
-      res.status(201).json(user);
-    })
-    .catch(err => {
-      switch (err.name || err.kind) {
-        case 'MongoError':
-          //Unique Conflict
-          if (err.code === 11000) {
-            return res.status(409).json({
-              errors: _(err.message)
-                .value()
-            });
-          }
-        default:
-          return res.status(400).json({
-            errors: _.map(err.errors, 'path')
-          });
-      }
-    });
-  },
-
-  /**
   * @api {put} /user/:id Request User information
   * @apiName PutUser
   * @apiGroup User
