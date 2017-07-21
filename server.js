@@ -10,9 +10,13 @@ const config = require('config');
 const cors = require('cors');
 const morgan = require('morgan');
 
+//===================================
+// routes ===========================
+//===================================
 const user     = require('./app/routes/user');
 const boutique = require('./app/routes/boutique');
 const auth     = require('./app/routes/auth');
+const file     = require('./app/routes/file');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -25,6 +29,7 @@ app.use(cors());
 app.use('/user', user);
 app.use('/boutique', boutique);
 app.use('/auth', auth);
+app.use('/file', file);
 
 app.use('/', express.static(__dirname + '/public/apidoc'));
 app.use('/coverage', express.static(__dirname + '/coverage/lcov-report'));

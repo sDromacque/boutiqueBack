@@ -2,5 +2,9 @@
   "DBHost": "mongodb://localhost/boutique",
   "mailgun_priv_key": "changeIt",
   "mailgun_domain": "changeIt",
-  "mailchimpApiKey": "changeIt"
+  "mailchimpApiKey": "changeIt",
+  "file": {
+    "uploads_zip": "./uploads/",
+    "image": "./uploads/images"
+  }
 }
