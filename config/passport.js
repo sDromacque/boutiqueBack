@@ -46,9 +46,9 @@ const jwtOptions = {
   secretOrKey: config.secret
 };
 
-const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done){
 
-  User.findById(payload._id, function(err, user){
+const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done){
+  User.findById(payload._doc._id, function(err, user){
 
     if (err){
       return done(err, false);
@@ -61,7 +61,6 @@ const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done){
     }
 
   });
-
 });
 
 passport.use(jwtLogin);
