@@ -12,7 +12,7 @@ const morgan = require('morgan');
 
 const user     = require('./app/routes/user');
 const boutique = require('./app/routes/boutique');
-const auth     = require('./app/routes/auth')
+const auth     = require('./app/routes/auth');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
