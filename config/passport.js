@@ -48,8 +48,7 @@ const jwtOptions = {
 
 
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done){
-  User.findById(payload._doc._id, function(err, user){
-
+  User.find({email: payload._doc.email}, function(err, user){
     if (err){
       return done(err, false);
     }
