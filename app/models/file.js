@@ -6,6 +6,11 @@ let FileSchema = new Schema({
   name: {
     type: String
   },
+  purpose: {
+    type: String,
+    enum: ['basic', 'first'],
+    default: 'basic'
+  }
 
 });
 

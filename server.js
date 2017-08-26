@@ -1,14 +1,16 @@
-const express = require('express');
-const path = require('path');
-const favicon = require('serve-favicon');
-const logger = require('morgan');
-const bodyParser = require('body-parser');
-const colors = require('colors');
-const app = express();
-const mongoose = require('mongoose');
-const config = require('config');
-const cors = require('cors');
-const morgan = require('morgan');
+const
+  express      = require('express'),
+  logger       = require('morgan'),
+  bodyParser   = require('body-parser'),
+  colors       = require('colors'),
+  app          = express(),
+  mongoose     = require('mongoose'),
+  config       = require('config'),
+  cors         = require('cors'),
+  morgan       = require('morgan'),
+  passport     = require('passport'),
+  requireAuth  = passport.authenticate('jwt', {session: false})
+;
 
 //===================================
 // routes ===========================
@@ -24,12 +26,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
 app.use(morgan("common"));
 
+
 app.use(cors());
 
 app.use('/user', user);
 app.use('/boutique', boutique);
 app.use('/auth', auth);
-app.use('/file', file);
+app.use('/file',requireAuth, file);
 
 app.use('/', express.static(__dirname + '/public/apidoc'));
 app.use('/coverage', express.static(__dirname + '/coverage/lcov-report'));
