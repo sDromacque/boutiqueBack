@@ -7,3 +7,4 @@ apidoc -f "/routes/.*\\.js$" -i ./ -o apidoc/
 
 test
  
+test
