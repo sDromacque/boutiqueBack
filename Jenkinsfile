@@ -12,6 +12,12 @@ pipeline {
         sh 'npm install'
         echo 'ok npm install'
       }
+    },
+    stage('Build') {
+      steps {
+        sh 'npm test'
+        echo 'ok test'
+      }
     }
   }
 }
