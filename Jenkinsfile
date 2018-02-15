@@ -1,23 +1,17 @@
-pipeline {
-    agent {
-        docker {
-            image 'node:6-alpine'
-            args '-p 3000:3000'
-        }
+node('testing') {
+    stage('Initialize') {
+        echo 'Initializing...'
+        def node = tool name: 'Node-7.4.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
+        env.PATH = "${node}/bin:${env.PATH}"
     }
-    environment {
-        CI = 'true' 
+
+    stage('Checkout') {
+        echo 'Getting source code...'
+        checkout scm
     }
-    stages {
-        stage('Build') {
-            steps {
-                sh 'npm install'
-            }
-        }
-        stage('Test') { 
-            steps {
-                sh './jenkins/scripts/test.sh' 
-            }
-        }
+
+    stage('Build') {
+        echo 'Building dependencies...'
+        sh 'npm i'
     }
 }
