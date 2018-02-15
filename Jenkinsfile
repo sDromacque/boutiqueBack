@@ -13,7 +13,7 @@ pipeline {
         echo 'ok npm install'
       }
     },
-    stage('Build') {
+    stage('Test') {
       steps {
         sh 'npm test'
         echo 'ok test'
